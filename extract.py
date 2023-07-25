@@ -24,13 +24,22 @@ def load_neos(neo_csv_path):
     :param neo_csv_path: A path to a CSV file containing data about near-Earth objects.
     :return: A collection of `NearEarthObject`s.
     """
-    # TODO: Load NEO data from the given CSV file.
+
     result = []
-    with open(neo_csv_path) as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            result.append(NearEarthObject(row['pdes'], row['name'], row['diameter'], row['pha']))
-    return result
+    try:
+        with open(neo_csv_path) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                result.append(NearEarthObject(row['pdes'], row['name'], row['diameter'], row['pha']))
+        return result
+    except(IOError, IndexError) as err:
+        if err == 'IndexError' or err == 'IOError':
+            print(f'IndexError: Unable to parse `neo.csv` file. - {err}')
+        else:
+            print(f'An error occured when reading `neo.csv` file. - {err}')
+            print('Exiting session. Goodbye!')
+            exit(1)
+
 
 
 def load_approaches(cad_json_path):
@@ -39,14 +48,23 @@ def load_approaches(cad_json_path):
     :param cad_json_path: A path to a JSON file containing data about close approaches.
     :return: A collection of `CloseApproach`es.
     """
-    # TODO: Load close approach data from the given JSON file.
+
     result = []
-    with open(cad_json_path) as f:
-        row = json.load(f)
-        for entry in row['data']:
-            designation = entry[0]
-            time = entry[3]
-            distance = entry[4]
-            velocity = entry[7]
-            result.append(CloseApproach(designation, time, distance, velocity))
-    return result
+    try:
+        with open(cad_json_path) as f:
+            row = json.load(f)
+            for entry in row['data']:
+                designation = entry[0]
+                time = entry[3]
+                distance = entry[4]
+                velocity = entry[7]
+                result.append(CloseApproach(designation, time, distance, velocity))
+        return result
+    except(IOError, IndexError) as err:
+        if err == 'IOError':
+            print(f'Unable to parse `cad.json` file. - {err}')         
+        else:
+            print(f'An error occured when reading `cad.json` file. - {err}')
+            print('Exiting session. Goodbye!')
+            exit(1)
+

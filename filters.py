@@ -59,7 +59,7 @@ class AttributeFilter:
         return self.op(self.get(approach), self.value)
 
     @classmethod
-    def get(cls, approach):
+    def get(cls, approach) -> str: # TODO: Remove unused argument
         """Get an attribute of interest from a close approach.
 
         Concrete subclasses must override this method to get an attribute of
