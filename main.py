@@ -384,22 +384,21 @@ def main():
     parser, inspect_parser, query_parser = make_parser()
     args = parser.parse_args()
 
-    loader = Loader("Loading...", "Done!", 0.05).start()
-    # Extract data from the data files into structured Python objects.
-    database = NEODatabase(load_neos(args.neofile), load_approaches(args.cadfile))
-    loader.stop()
-    # Run the chosen subcommand.
-    if args.cmd == 'inspect':
-        inspect(database, pdes=args.pdes, name=args.name, verbose=args.verbose)
-    elif args.cmd == 'query':
-        query(database, args)
-    elif args.cmd == 'interactive':
-        try:
+    try:
+        loader = Loader("Loading...", "Done!", 0.05).start()
+        # Extract data from the data files into structured Python objects.
+        database = NEODatabase(load_neos(args.neofile), load_approaches(args.cadfile))
+        loader.stop()
+        # Run the chosen subcommand.
+        if args.cmd == 'inspect':
+            inspect(database, pdes=args.pdes, name=args.name, verbose=args.verbose)
+        elif args.cmd == 'query':
+            query(database, args)
+        elif args.cmd == 'interactive':
             NEOShell(database, inspect_parser, query_parser, aggressive=args.aggressive).cmdloop()
-        except(KeyboardInterrupt):
+    except(KeyboardInterrupt):
             print('Exiting session. Goodbye!')
             exit(0)
-
 
 if __name__ == '__main__':
     main()
