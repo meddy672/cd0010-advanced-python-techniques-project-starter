@@ -48,6 +48,8 @@ from extract import load_neos, load_approaches
 from database import NEODatabase
 from filters import create_filters, limit
 from write import write_to_csv, write_to_json
+from loader import Loader
+
 
 
 # Paths to the root of the project and the `data` subfolder.
@@ -56,6 +58,7 @@ DATA_ROOT = PROJECT_ROOT / 'data'
 
 # The current time, for use with the kill-on-change feature of the interactive shell.
 _START = time.time()
+
 
 
 def date_fromisoformat(date_string):
@@ -381,9 +384,10 @@ def main():
     parser, inspect_parser, query_parser = make_parser()
     args = parser.parse_args()
 
+    loader = Loader("Loading...", "Done!", 0.05).start()
     # Extract data from the data files into structured Python objects.
     database = NEODatabase(load_neos(args.neofile), load_approaches(args.cadfile))
-
+    loader.stop()
     # Run the chosen subcommand.
     if args.cmd == 'inspect':
         inspect(database, pdes=args.pdes, name=args.name, verbose=args.verbose)

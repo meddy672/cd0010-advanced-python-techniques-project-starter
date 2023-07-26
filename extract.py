@@ -32,7 +32,7 @@ def load_neos(neo_csv_path):
             for row in reader:
                 result.append(NearEarthObject(row['pdes'], row['name'], row['diameter'], row['pha']))
         return result
-    except(IOError, IndexError) as err:
+    except(IOError, IndexError, KeyboardInterrupt) as err:
         if err == 'IndexError' or err == 'IOError':
             print(f'IndexError: Unable to parse `neo.csv` file. - {err}')
         else:
@@ -60,7 +60,7 @@ def load_approaches(cad_json_path):
                 velocity = entry[7]
                 result.append(CloseApproach(designation, time, distance, velocity))
         return result
-    except(IOError, IndexError) as err:
+    except(IOError, IndexError, KeyboardInterrupt) as err:
         if err == 'IOError':
             print(f'Unable to parse `cad.json` file. - {err}')         
         else:
