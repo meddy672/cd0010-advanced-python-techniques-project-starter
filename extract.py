@@ -38,7 +38,7 @@ def load_neos(neo_csv_path):
         else:
             print(f'An error occured when reading `neo.csv` file. - {err}')
             print('Exiting session. Goodbye!')
-            exit(1)
+            exit(0)
 
 
 
@@ -66,5 +66,5 @@ def load_approaches(cad_json_path):
         else:
             print(f'An error occured when reading `cad.json` file. - {err}')
             print('Exiting session. Goodbye!')
-            exit(1)
+            exit(0)
 

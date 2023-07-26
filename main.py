@@ -394,7 +394,11 @@ def main():
     elif args.cmd == 'query':
         query(database, args)
     elif args.cmd == 'interactive':
-        NEOShell(database, inspect_parser, query_parser, aggressive=args.aggressive).cmdloop()
+        try:
+            NEOShell(database, inspect_parser, query_parser, aggressive=args.aggressive).cmdloop()
+        except(KeyboardInterrupt):
+            print('Exiting session. Goodbye!')
+            exit(0)
 
 
 if __name__ == '__main__':
