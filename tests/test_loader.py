@@ -1,6 +1,5 @@
 import unittest
 import os
-import itertools
 import builtins
 
 
