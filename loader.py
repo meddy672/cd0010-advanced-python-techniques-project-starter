@@ -22,28 +22,37 @@ class Loader:
         self.done = False
 
     def start(self):
+        """
+        
+        """
         self._thread.start()
         return self
     
 
-
     def _animate(self):
+        """
+        
+        """
         for c in cycle(self.steps):
             if self.done:
                 break
             print(f"\r{self.desc} {c}", flush=True, end="")
             sleep(self.timeout)
 
-    def __enter__(self):
-        self.start()
-
 
     def stop(self):
+        """
+        
+        """
         self.done = True
         cols = get_terminal_size((180, 20)).columns
         print("\r" + " " * cols, end="", flush=True)
         print(f"\r{self.end}", flush=True)
 
+
+    def __enter__(self):
+        self.start()
+        
 
     def __exit__(self, exc_type, exc_value, tb):
         # handle exceptions with those variables ^

@@ -385,7 +385,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        loader = Loader("Loading...", "Done!", 0.05).start()
+        loader = Loader("Loading Data...", "Data Ready!", 0.05).start()
         # Extract data from the data files into structured Python objects.
         database = NEODatabase(load_neos(args.neofile), load_approaches(args.cadfile))
         loader.stop()
