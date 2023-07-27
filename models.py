@@ -20,7 +20,7 @@ You'll edit this file in Task 1.
 from helpers import cd_to_datetime, datetime_to_str
 
 
-class NearEarthObject:
+class  NearEarthObject:
     """A near-Earth object (NEO).
 
     An NEO encapsulates semantic and physical parameters about the object, such
@@ -32,6 +32,7 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
+
     def __init__(self, designation, name, diameter, hazardous) -> None:
         """Create a new `NearEarthObject`.
 
@@ -53,7 +54,7 @@ class NearEarthObject:
     
 
     def isHazardous(self, hazardous):
-        """Check if the NEO is Hazardous or not
+        """Check if the NEO is Hazardous or not.
 
         :param hazardous: A string value from passed to the constructor.
         """
@@ -77,7 +78,7 @@ class NearEarthObject:
                f"diameter={self.diameter:.3f}, hazardous={self.hazardous!r})"
 
 
-class CloseApproach:
+class  CloseApproach:
     """A close approach to Earth by an NEO.
 
     A `CloseApproach` encapsulates information about the NEO's close approach to
@@ -90,13 +91,12 @@ class CloseApproach:
     private attribute, but the referenced NEO is eventually replaced in the
     `NEODatabase` constructor.
     """
-
+    
     def __init__(self, designation, jd_time, distance, velocity) -> None:
         """Create a new `CloseApproach`.
 
         :param info: A dictionary of excess keyword arguments supplied to the constructor.
         """
-
         self._designation = designation
         self.time = cd_to_datetime(jd_time)
         self.distance = float(distance) or float('nan')
@@ -118,7 +118,6 @@ class CloseApproach:
         formatted string that can be used in human-readable representations and
         in serialization to CSV and JSON files.
         """
-
         return datetime_to_str(self.time)
 
     def __str__(self) -> str:

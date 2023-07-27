@@ -1,12 +1,16 @@
+"""A loader class to display while data is being loaded."""
+
 from itertools import cycle
 from shutil import get_terminal_size
 from threading import Thread
 from time import sleep
 
 class Loader:
+    """A loader class that defines the object."""
+
     def __init__(self, desc="Loading...", end="Done!", timeout=0.1):
         """
-        A loader-like context manager
+        Initialize loader object with arguments.
 
         Args:
             desc (str, optional): The loader's description. Defaults to "Loading...".
@@ -22,7 +26,7 @@ class Loader:
         self.done = False
 
     def start(self):
-        """ Starts the loader thread."""
+        """Start the loader thread."""
         self._thread.start()
         return self
     
@@ -45,9 +49,10 @@ class Loader:
 
 
     def __enter__(self):
+        """Start thread execution."""
         self.start()
         
 
     def __exit__(self, exc_type, exc_value, tb):
-        # handle exceptions with those variables ^
+        """Stop the thread execution."""
         self.stop()

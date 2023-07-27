@@ -179,7 +179,6 @@ def inspect(database, pdes=None, name=None, verbose=False):
     :param verbose: Whether to additionally print all of a matching NEO's close approaches.
     :return: The matching `NearEarthObject`, or None if not found.
     """
-    # Fetch the NEO of interest.
     if pdes:
         neo = database.get_neo_by_designation(pdes)
     else:
@@ -212,7 +211,6 @@ def query(database, args):
     :param database: The `NEODatabase` containing data on NEOs and their close approaches.
     :param args: All arguments from the command line, as parsed by the top-level parser.
     """
-    # Construct a collection of filters from arguments supplied at the command line.
     filters = create_filters(
         date=args.date, start_date=args.start_date, end_date=args.end_date,
         distance_min=args.distance_min, distance_max=args.distance_max,
@@ -237,7 +235,7 @@ def query(database, args):
             print("Please use an output file that ends with `.csv` or `.json`.", file=sys.stderr)
 
 
-class NEOShell(cmd.Cmd):
+class  NEOShell(cmd.Cmd):
     """Perform the `interactive` subcommand.
 
     This is a `cmd.Cmd` shell - a specialized tool for command-based REPL sessions.
@@ -249,6 +247,7 @@ class NEOShell(cmd.Cmd):
     inspect and query commands, while only loading the data (which can be quite
     slow) once.
     """
+    
     intro = ("Explore close approaches of near-Earth objects. "
              "Type `help` or `?` to list commands and `exit` to exit.\n")
     prompt = '(neo) '
