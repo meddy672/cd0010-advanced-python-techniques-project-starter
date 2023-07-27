@@ -22,17 +22,13 @@ class Loader:
         self.done = False
 
     def start(self):
-        """
-        
-        """
+        """ Starts the loader thread."""
         self._thread.start()
         return self
     
 
     def _animate(self):
-        """
-        
-        """
+        """Show animation steps until stop is called."""
         for c in cycle(self.steps):
             if self.done:
                 break
@@ -41,9 +37,7 @@ class Loader:
 
 
     def stop(self):
-        """
-        
-        """
+        """Stop the loader thread."""
         self.done = True
         cols = get_terminal_size((180, 20)).columns
         print("\r" + " " * cols, end="", flush=True)
